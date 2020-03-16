@@ -1,7 +1,9 @@
 
 #map{
-    height: 500px;
-    width: 500px;
+  width: 1200px;
+  height: 1200px;
+    max-height: 100%;
+    max-width: 100%;
 }
 #tools {
     position: absolute;
@@ -17,4 +19,10 @@
   .locate {
     top: 6em;
     left: .5em;
+  }
+  #data{
+width: 450px;
+max-width: 25%;
+height: 100%;
+width: 100%;
   }

@@ -1,8 +1,72 @@
-package main
-import (
-	"net/http"
-)
-var sources [
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/ol.js"></script>
+    <script src="./js/main.js"></script>
+    <link rel="stylesheet" href="./css/ol.css">
+    <link rel="stylesheet" href="./css/mapstyle.css">
+
+    <title>National Viewer</title>
+</head>
+
+<body>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: right;
+        }
+        
+        #data {
+            order: 2;
+        }
+    </style>
+    <h2>MAP</h2>
+    <div id="container">
+
+        <div id="map"></div>
+
+        <div id="data">
+           
+<ul id="stuff">
+
+
+</ul>
+        </div>
+
+    </div>
+
+
+
+
+
+
+</body>
+
+<script>
+
+
+    var map = new ol.Map({
+        target: "map",
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([-455.522465, 37.393436]),
+            zoom: 4
+        })
+    })
+
+
+
+
+const sources1 = [
     "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/radar_base_reflectivity/MapServer",
     "https://idpgis.ncep.noaa.gov/arcgis/rest/services/radar/radar_base_reflectivity_time/ImageServer",
     "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer",
@@ -24,10 +88,30 @@ var sources [
     "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/aprfc_RiverBreakupStatus/MapServer"
 ]
 
-
-func getSource(source string)  {
-	
-cli:= &http.Client{}
-esp, err := cli.Get(source)
-fmt.Println(esp)
+let st=document.getElementById("stuff")
+for (i=0;i<sources1.length;i++){
+let li=document.createElement("li")
+    fetch(sources1[i]+"/?f=json")
+    .then((resp) => resp.json()) // Transform the data into json
+    .then(function(data) {
+        console.log(data.mapName)
+        li.innerText=data.mapName
+        st.appendChild(li)
+      // Create and append the li's to the ul
+      })
+    
 }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</html>

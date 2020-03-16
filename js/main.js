@@ -1,8 +1,5 @@
-package main
-import (
-	"net/http"
-)
-var sources [
+
+const sources = [
     "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/radar_base_reflectivity/MapServer",
     "https://idpgis.ncep.noaa.gov/arcgis/rest/services/radar/radar_base_reflectivity_time/ImageServer",
     "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer",
@@ -25,9 +22,13 @@ var sources [
 ]
 
 
-func getSource(source string)  {
-	
-cli:= &http.Client{}
-esp, err := cli.Get(source)
-fmt.Println(esp)
+for (i=0;i<sources.length;i++){
+
+    fetch(sources[i])
+    .then((resp) => resp.json()) // Transform the data into json
+    .then(function(data) {
+        console.log(data)
+      // Create and append the li's to the ul
+      })
+    
 }

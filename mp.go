@@ -2,6 +2,7 @@ package main
 
 import (
 	//"database/sql"
+	//"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -11,10 +12,11 @@ import (
 var tmpl *template.Template
 
 func init() {
-	tmpl = template.Must(template.ParseFiles("index.html"))
+	tmpl = template.Must(template.ParseFiles("index.gohtml"))
 }
 
 func main() {
+	getMapData("https://idpgis.ncep.noaa.gov/arcgis/rest/services/radar/radar_base_reflectivity_time/ImageServer/?f=json")
 	http.HandleFunc("/", rooter)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
 	http.Handle("/geo/", http.StripPrefix("/geo/", http.FileServer(http.Dir("./geo"))))
@@ -30,20 +32,20 @@ func getMapData(url string) string {
 	c := &http.Client{}
 	resp, err := c.Get(url)
 	if err != nil {
-		fmt.Println("oh shit")
+		fmt.Println("sorry")
 	}
 	b, _ := ioutil.ReadAll(resp.Body)
 	//xml := strings.NewReader(string(b))
 	fmt.Println(string(b))
-	//json, err := xj.Convert(b)
+	
 	//fmt.Println(xml, "\t", json)
 	return string(b)
 }
 
 func rooter(resp http.ResponseWriter, req *http.Request) {
-	
+	data:=getMapData(url)
 
-	tmpl.ExecuteTemplate(resp, "index.html", nil)
+	tmpl.ExecuteTemplate(resp, "index.gohtml", data)
 }
 
 var url = "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer/0?f=pjson"
