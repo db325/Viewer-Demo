@@ -12,7 +12,7 @@ import (
 var tmpl *template.Template
 
 func init() {
-	tmpl = template.Must(template.ParseFiles("index.gohtml"))
+	tmpl = template.Must(template.ParseFiles("index.html"))
 }
 
 func main() {
@@ -45,7 +45,7 @@ func getMapData(url string) string {
 func rooter(resp http.ResponseWriter, req *http.Request) {
 	data:=getMapData(url)
 
-	tmpl.ExecuteTemplate(resp, "index.gohtml", data)
+	tmpl.ExecuteTemplate(resp, "index.html", data)
 }
 
 var url = "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer/0?f=pjson"

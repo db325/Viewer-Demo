@@ -1,7 +1,18 @@
 
+ul>li{
+  list-style:  none;
+  color: black;
+  border-bottom: 1px solid rgb(1, 12, 34);
+  text-align: center;}
+
+
+  ul>li:hover{
+    background-color: darkcyan;
+    font-size: larger;
+  }
 #map{
   width: 1200px;
-  height: 1200px;
+  height: 900px;
     max-height: 100%;
     max-width: 100%;
 }
@@ -26,3 +37,6 @@ max-width: 25%;
 height: 100%;
 width: 100%;
   }
+  
+  
+   
