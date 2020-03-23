@@ -1,7 +1,8 @@
 
 
 
-const sources1 = [
+
+const dataLayers = [
         "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/radar_base_reflectivity/MapServer",
         "https://idpgis.ncep.noaa.gov/arcgis/rest/services/radar/radar_base_reflectivity_time/ImageServer",
         "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer",
@@ -23,14 +24,18 @@ const sources1 = [
         "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/aprfc_RiverBreakupStatus/MapServer"
     ]
     
-
+let base= new ol.layer.Tile({
+    source:new ol.source.XYZ({
+        url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+       
+    }),
+    visible:true
+})
     var map = new ol.Map({
         target: "map",
         layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
-            })
-
+           base
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat([-455.522465, 37.393436]),
@@ -40,14 +45,26 @@ const sources1 = [
 
 
 
- myMap = new Map()
 
-    let st = document.getElementById("stuff")
-   
-
+const dataL=document.getElementById('data-layers')
+const baseL=document.getElementById('base-layers')
 
 
+function displayBase(baseArray){
+    for (i=0;i<baseLayers.length;i++){
+        li=document.createElement('li')
 
+    }
+}
+
+
+
+
+
+
+// for (const [key, value] of myMap.entries()) {
+//     console.log(key, value);
+//   }
 
 
 

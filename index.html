@@ -1,13 +1,11 @@
-<!doctype html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="./js/ol.js"></script>
-    <script src="./js/main.js"></script>
-    <link rel="stylesheet" href="./css/ol.css">
+let WorldPhysical = {
+  url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}',
+  name: "World Physical"
+}
+let OceanBase = 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
+let dark = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+let OSMINTL = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
+  'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', )    <link rel="stylesheet" href="./css/ol.css">
     <link rel="stylesheet" href="./css/mapstyle.css">
 
     <title>National Viewer</title>
@@ -30,8 +28,13 @@
         <div id="map"></div>
 
         <div id="data">
+            <h3>Base Layers</h3>
+            <ul id="base-layers">
 
-            <ul id="stuff">
+
+            </ul>
+            <h3>Data Layers</h3>
+            <ul id="data-layers">
 
 
             </ul>
@@ -39,7 +42,10 @@
 
     </div>
 
-
+    <script>
+        
+    </script>
+    <script src="./js/main.js"></script>
 </body>
 
 
