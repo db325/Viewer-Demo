@@ -1,4 +1,11 @@
 
+
+h3.title {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font: x-large;
+}
+
 ul>li{
   list-style:  none;
   color: black;

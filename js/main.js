@@ -1,5 +1,5 @@
 
-
+var lll="layersz.js"
 
 
 const dataLayers = [
@@ -24,38 +24,63 @@ const dataLayers = [
         "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/aprfc_RiverBreakupStatus/MapServer"
     ]
     
-let base= new ol.layer.Tile({
+// let base= new ol.layer.Tile({
+//     source:new ol.source.XYZ({
+//         url:OSMINTL.url,
+//         maxZoom:20,
+//         FORMAT:"png",
+//         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+       
+//     }),
+//     visible:true
+// })
+
+
+
+
+
+
+let base2= new ol.layer.Tile({
     source:new ol.source.XYZ({
-        url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}',
+        cors:true,
+        crossOriging:"anonymous",
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
        
     }),
     visible:true
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+ba=makeBaseArray(BASE)
+
     var map = new ol.Map({
         target: "map",
-        layers: [
-           base
-        ],
+        layers: [makeBaseLayer(BASE[2].url)],//makeBaseArray(BASE)],
         view: new ol.View({
             center: ol.proj.fromLonLat([-455.522465, 37.393436]),
             zoom: 4
         })
     })
 
+// l=makeBaseLayer(BASE[0])
+    
+//    map.addLayer(l)
+  
+//   console.log(l)
 
-
-
-const dataL=document.getElementById('data-layers')
-const baseL=document.getElementById('base-layers')
-
-
-function displayBase(baseArray){
-    for (i=0;i<baseLayers.length;i++){
-        li=document.createElement('li')
-
-    }
-}
+//displayBase(BASE)
 
 
 
@@ -76,19 +101,5 @@ function displayBase(baseArray){
 
 
 
-function createLayer(url){
-    
-        let layer = new ol.layer.Tile({
-            source:new ol.source.TileArcGISRest({
-                attributions:"",
-                crossOrigin:"anonymous",
-                url:url
-            }),
-            visible:true,
-            layerName:""
-        })
-        return layer
-    
 
-}
 

@@ -1,12 +1,14 @@
-let WorldPhysical = {
-  url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}',
-  name: "World Physical"
-}
-let OceanBase = 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
-let dark = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-let OSMINTL = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
-  'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', )    <link rel="stylesheet" href="./css/ol.css">
-    <link rel="stylesheet" href="./css/mapstyle.css">
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/ol.js"></script>
+
+    <link rel="stylesheet" href="./css/ol.css">
+
 
     <title>National Viewer</title>
 </head>
@@ -28,24 +30,27 @@ let OSMINTL = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
         <div id="map"></div>
 
         <div id="data">
-            <h3>Base Layers</h3>
+            <h3 class="title">Base Layers</h3>
             <ul id="base-layers">
 
 
             </ul>
-            <h3>Data Layers</h3>
-            <ul id="data-layers">
+            <div>
+                <h3 style="text-align: center;">Data Layers</h3>
+                <ul id="data-layers">
+                </ul>
+            </div>
 
-
-            </ul>
         </div>
 
     </div>
 
     <script>
-        
     </script>
+    <link rel="stylesheet" href="./css/mapstyle.css">
+    <script src="./js/layersz.js"></script>
     <script src="./js/main.js"></script>
+
 </body>
 
 
