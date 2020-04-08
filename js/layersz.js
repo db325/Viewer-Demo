@@ -1,6 +1,31 @@
+var sources =[
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/radar_base_reflectivity/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/radar/radar_base_reflectivity_time/ImageServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/NOHRSC_Snow_Analysis/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Climate_Outlooks/cpc_weather_hazards/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NDFD_temp/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/natl_fcst_wx_chart/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/wpc_precip_hazards/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/wpc_prob_winter_precip/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/SPC_wx_outlks/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/ahps_riv_gauges/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/sig_riv_fld_outlk/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/wpc_qpf/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/rfc_hourly_qpe/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/rfc_dly_qpe/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/rfc_gridded_ffg/MapServer",
+    "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/aprfc_RiverBreakupStatus/MapServer"
+]
 
 
 
+
+const Base={
+    "name":"",
+    "url":""
+}
 
 let  WorldPhysical={
     url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}',
@@ -14,92 +39,41 @@ let dark={
     url:'https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
     name:"Dark Carto"
 }
-let OSMINTL={
-    url:'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}',
-    name:"OSM International"
-}
-let AliDade={
-url:'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-name:"Alidade"
 
-}
-
-const BASE=[WorldPhysical,OceanBase,dark,OSMINTL,AliDade]
+const BASES=[WorldPhysical,OceanBase,dark]
 
 
-    const baseStore= new Map()
-    for (i=0;i<BASE.length;i++){
-        baseStore.set(BASE[i].name,BASE[i])
-    }
-    
 
 
-console.log(baseStore)
+const fmtString="/?f=json"
+
+
 
 
 const dataL=document.getElementById('data-layers')
-const baseL=document.getElementById('base-layers')
 
 
-function displayBase(baseObj){
-   
-    for (var m in baseStore){
-        for (var i=0;i<baseStore[i].length;i++){
-            
-       //baseStore[m][i]
-       console.log(baseStore[m][i])
-      
-        }
-        
-    } 
-}
-
-
-    
-
-//Initializion Code Below//
-for (const [key, value] of baseStore.entries()) {
-    let li= document.createElement('li')
-            li.innerText=key
-            baseL.appendChild(li)
-    console.log(key);
-  }
-
-
-
-
-
-function makeBaseLayer(url){
-    let layer = new ol.layer.Tile({
+function createBase(url,name){
+    let base= new ol.layer.Tile({
         source:new ol.source.XYZ({
             url:url
-        })
+        }),
+        name:name,
+        visible:false
     })
-    layer.visible=true
-    
-    return layer
+    return base
+}
+
+// function to create baselayers array for map layerGroup
+
+function createBaseLayersGroup(baseObjectArray){
+    let baseLayerArray=[]
+    for( b =0;b< BASES.length;b++){
+    let b1=createBase(BASES[b].url,BASES[b].name)
+    baseLayerArray.push(b1)
+}
+  return baseLayerArray
 }
 
 
 
-function makeBaseArray(urls){
-    let urlarray=[]
-    
-    for( var url in urls){
-       urlarray.push( makeBaseLayer(url.url))
-    }
-    
-    return urlarray
-}
-
- // let cnt=0
-    // for(i=0;i<baseStore.length;i++){
-    //     let li= document.createElement('li')
-    //     console.log(baseStore[i][cnt])
-    //     li.innerText=baseStore[i][cnt].name
-    //     cnt++
-    //     li.addEventListener("click",()=>{
-    //        createBase(baseObj[i].url)
-    //     })
-    //     baseL.appendChild(li)
-    // }

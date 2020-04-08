@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script src="./js/ol.js"></script>
 
     <link rel="stylesheet" href="./css/ol.css">
@@ -15,30 +16,34 @@
 
 <body>
     <style>
-        #container {
-            display: flex;
-            flex-direction: right;
-        }
-        
-        #data {
-            order: 2;
-        }
+
     </style>
     <h2>MAP</h2>
     <div id="container">
 
         <div id="map"></div>
+        <div id="popup">
+            <p id="text"></p>
+        </div>
 
-        <div id="data">
-            <h3 class="title">Base Layers</h3>
-            <ul id="base-layers">
+        <div id="data-view">
+            <div id="base">
+                <h3 class="title">Base Layers</h3>
+                <button name="basleLayerRadio" checked value="World Geo" class="base-btn">World Geo </button>
+                <button name="basleLayerRadio" value="OSM" class="base-btn">Open Street Map </button>
+                <button name="basleLayerRadio" value="World Physical" class="base-btn">World Physical </button>
+                <button name="basleLayerRadio" value="Dark Carto" class="base-btn">Dark Carto </button>
+                <button name="basleLayerRadio" value="Ocean Base" class="base-btn">Ocean Base </button>
 
 
-            </ul>
+            </div>
+
             <div>
                 <h3 style="text-align: center;">Data Layers</h3>
                 <ul id="data-layers">
+
                 </ul>
+                <div id="info"></div>
             </div>
 
         </div>
@@ -49,7 +54,9 @@
     </script>
     <link rel="stylesheet" href="./css/mapstyle.css">
     <script src="./js/layersz.js"></script>
-    <script src="./js/main.js"></script>
+
+    <script src="./js/main.js" type="module"></script>
+    <script src="js/feature.js"></script>
 
 </body>
 

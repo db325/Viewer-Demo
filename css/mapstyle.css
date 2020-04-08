@@ -1,4 +1,14 @@
+#container {
+  display: flex;
+  flex-direction: right;
+}
 
+#base-layers {
+  padding:0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
 h3.title {
   text-align: center;
@@ -6,44 +16,190 @@ h3.title {
   font: x-large;
 }
 
-ul>li{
+button{
+ 
+  background-color:  #f0f0f0;
   list-style:  none;
   color: black;
   border-bottom: 1px solid rgb(1, 12, 34);
-  text-align: center;}
-
+  border-left:  1px solid rgb(1, 12, 34);
+  border-right:  1px solid rgb(1, 12, 34);
+  border-radius: 25%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+width: 100%;
+height: 47px;}
+#mapname{
+  text-align: center;
+  margin: 0;
+  font-size: xx-large;
+}
 
   ul>li:hover{
-    background-color: darkcyan;
+    background-color: #d8e4dc;
     font-size: larger;
   }
 #map{
-  width: 1200px;
-  height: 900px;
+    width: 1200px;
+    height: 900px;
     max-height: 100%;
-    max-width: 100%;
+    max-width: 1250px;
 }
-#tools {
-    position: absolute;
-    top:1rem;
-    right:1rem;
-  }
-  #tools a {
-    display: inline-block;
-    padding: 0.5rem;
-    background: white;
-    cursor: pointer;
-  }
-  .locate {
-    top: 6em;
-    left: .5em;
-  }
+#data-view{
+  width: match-parent;
+  max-width: 850px;
+  max-height: 100%;
+}
   #data{
-width: 450px;
-max-width: 25%;
+
+max-width: 100%;
 height: 100%;
-width: 100%;
+width: 25%;
   }
   
+  #popup{
+    text-overflow: clip;
+    flex-wrap: wrap;
+    width: 10px;;
+  }
+   #base-layers{
+     width: 100%;
+   }
+
+@media screen and (max-width: 1280px) {
+  #container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap:100%;
+}
+#map{
+    order: 0;
+    width: 100%;
+   height: 398px;
+}
+#base{
+  order: 2;
+  width: 100%;
+  margin:0 auto 0 auto;
+  flex-direction: row;
+ 
   
-   
+}
+
+
+}
+
+@media screen and (min-width:1414px){
+  #container {
+    display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#map{
+  order: 1;
+  width: 80%;
+}
+#data-view{
+  order: 2;
+  width: 20%;
+}
+}
+
+
+
+
+/* Pulse */
+@-webkit-keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+@keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+.hvr-pulse {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-pulse:hover, .hvr-pulse:focus, .hvr-pulse:active {
+  -webkit-animation-name: hvr-pulse;
+  animation-name: hvr-pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+/* Radial Out */
+.hvr-radial-out {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+  background: #e1e1e1;
+  font-size: larger;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.hvr-radial-out:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #560a86;
+  border-radius: 100%;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-radial-out:hover, .hvr-radial-out:focus, .hvr-radial-out:active {
+  color: white;
+}
+.hvr-radial-out:hover:before, .hvr-radial-out:focus:before, .hvr-radial-out:active:before {
+  -webkit-transform: scale(2);
+  transform: scale(2);
+}
+
+
+.btn-clicked:focus{
+  background: #560a86;
+  font-size: x-large;
+}
+
+.base-btn{
+  font-size: large;
+}
