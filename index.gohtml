@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="./js/ol.js"></script>
+   
+
+    <link rel="stylesheet" href="./css/ol.css">
+
+
+    <title>National Viewer</title>
+</head>
+
+<body>
+    <style>
+
+    </style>
+    <h2>MAP</h2>
+    <div id="container">
+
+        <div id="map"></div>
+        <div id="popup">
+            <p id="text"></p>
+        </div>
+
+        <div id="data-view">
+            <div id="base">
+                <h3 class="title">Base Layers</h3>
+                <button name="basleLayerRadio" checked value="World Geo" class="base-btn">World Geo </button>
+                <button name="basleLayerRadio" value="OSM" class="base-btn">Open Street Map </button>
+                <button name="basleLayerRadio" value="World Physical" class="base-btn">World Physical </button>
+                <button name="basleLayerRadio" value="Dark Carto" class="base-btn">Dark Carto </button>
+                <button name="basleLayerRadio" value="Ocean Base" class="base-btn">Ocean Base </button>
+
+
+            </div>
+
+            <div id="data">
+                <h3 style="text-align: center;">Data Layers</h3>
+
+                <div id="data-layers">
+                    <p> {{.}}</p>
+                </div>
+                <div id="info"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+  
+    <link rel="stylesheet" href="./css/mapstyle.css">
+    <script src="./js/layersz.js"></script> 
+    <script src="./js/main.js" type="module"></script>
+    <script src="js/feature.js"></script>
+<script src="/sw.js"></script>
+
+
+  <script>
+ 
+
+       // var t=JSON.stringify({{.}})
+       var Ls= window.localStorage
+
+       let urls={{.UrlArray}}
+       let data={{.DataArray}}
+     console.log(  JSON.parse(data[3]))
+       //let ls = Window.localStorage
+
+for(let i=0;i<urls.length;i++){
+    let n
+    let val =JSON.parse(data[i])
+    //console.log(val)
+    if(val.mapName===undefined){
+   console.log(val.documentInfo)
+   if(val.layers){
+       let fields=[]
+for(let k=0;k<val.layers.length;k++){
+    fields.push(val.layers[k])
+}
+    val.fields=fields
+   }
+        let datalayer=createDataLayer(urls[i],val.name)
+        datalayer.layers=val.layers
+        datalayer.comments=val.description
+        datalayer.url=urls[i]
+        //console.log(datalayer)
+        Ls.setItem(val.name,datalayer)
+
+    }else{
+    let datalayer=createDataLayer(urls[i],val.mapName)
+        datalayer.layers=val.layers
+        datalayer.comments=val.documentInfo.Comments
+        datalayer.url=urls[i]
+        //console.log(datalayer)
+        Ls.setItem(val.name,datalayer)
+    }
+    
+    
+
+   
+
+}
+
+
+
+    </script>
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

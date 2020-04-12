@@ -16,7 +16,6 @@ let forcastGuidance={
     url:"https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer",
 
     name:"Forceast Guidance Warnings"
-
 }
 let radarsnowAnalysis={
     url: "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/NOHRSC_Snow_Analysis/MapServer",
@@ -39,7 +38,6 @@ let cpcWeatherHaz={
 let ndfdTemp={
     url:"https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NDFD_temp/MapServer", 
     name:"NDFD Temp"
-
 }
 let nationalForecast={
     url: "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/natl_fcst_wx_chart/MapServer",
@@ -200,9 +198,7 @@ function createDataLayer(url,name){
       for(let o=0;o<DATALAYER.length;o++){
         let l= createDataLayer(DATALAYER[o].url,DATALAYER[o].name)
             dataLayerArray.push(l)
-           console.log(l)
-      
-      //d.push(l)
+           
       }
       
         return dataLayerArray
@@ -212,18 +208,104 @@ function createDataLayer(url,name){
       let dlyr= document.getElementById('data-layers')
       let dlg= DLG.getLayers().getArray()
       DATALAYER.forEach(d=>{
-          let b= document.createElement('button')
+          let b= document.createElement('li')
           b.innerText=d.name
           b.value=d.name
-          let v=b.value
+          let v=b.innerText
           b.className="hvr-radial-out"
           b.addEventListener('click',()=>{
-   dlg.forEach((l,i)=>{
+            //  console.log(b.innerText)
+        dlg.forEach((l,i)=>{
        if(v===l.get('name')){
-           l.setVisible(true)
-       }
-   })
+          let v=l.getVisible()
+          if(v===false){ 
+          l.setVisible(true)
+          console.log(l.getProperties())
+          b.style="color:orange"
+      }else{
+          l.setVisible(false)
+        console.log(l.getProperties())
+          b.style=""
+      }
+      
+   }
+})
           })
           dlyr.appendChild(b)
       })
     
+      
+
+
+
+
+//       var vectorSource = new ol.source.Vector({
+//         loader: function(extent, resolution, projection) {
+//             console.log(extent)
+//           var  url= "https://gis.ncdc.noaa.gov/arcgis/rest/services/geo/radar_coverage/MapServer" + "/"+'2' + '/query/?f=json&' +
+//               'returnGeometry=true&spatialRel=esriSpatialRelIntersects&geometry=' +
+//               encodeURIComponent('{"xmin":' + extent[0] + ',"ymin":' +
+//                   extent[1] + ',"xmax":' + extent[2] + ',"ymax":' + extent[3] +
+//                   ',"spatialReference":{"wkid":102100}}') +
+//               '&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*' +
+//               '&outSR=102100';
+//           $.ajax({url: url, dataType: 'jsonp', success: function(response) {
+//             if (response.error) {
+//               alert(response.error.message + '\n' +
+//                   response.error.details.join('\n'));
+//             } else {
+//               // dataProjection will be read from document
+//               var features = new ol.format.EsriJSON().readFeatures(response, {
+//                 featureProjection: projection
+//               });
+//               console.log(response)
+//               if (features.length > 0) {
+//                 vectorSource.addFeatures(features);
+//               }
+//             }
+//           }});
+//         },
+//         strategy: ol.loadingstrategy.tile(ol.tilegrid.createXYZ({
+//           tileSize: 512
+//         }))
+//       });
+      
+//       let vectLayer=new ol.layer.Vector({
+//           source:vectorSource,
+//           style:(feature)=>{
+// var arr=feature.get("OBJECTID")
+// //console.log(arr)
+// if(arr<75){
+//     return STYLES["OBJECTID"]
+
+// }
+
+
+//           },
+//           visible:true
+//       })
+
+
+
+//     let STYLES={
+//         "OBJECTID":new ol.style.Style({
+//             fill: new ol.style.Fill({
+//             color:[57, 121, 57, 255]
+//             }),
+//             stroke:new ol.style.Stroke({
+//                 color:"black",
+//                 width:2
+//             }),
+//         })
+//     }
+
+
+
+
+
+
+
+
+
+
+

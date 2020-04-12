@@ -1,3 +1,15 @@
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+  .then(function(registration) {
+    console.log('Registration successful, scope is:', registration.scope);
+  })
+  .catch(function(error) {
+    console.log('Service worker registration failed, error:', error);
+  });
+}
+
+
+
 //import 'ol/ol.css';
 let Map = ol.Map;
 let View = ol.View;
@@ -14,22 +26,9 @@ let createXYZ = ol.tilegrid;
 let testArray=[]
 
 
-
-
-
-
-
-
-
 var LG= new ol.layer.Group({
   layers:createBaseLayersGroup(BASES)
 })
-
-
-
-
-
-
 
 
 let l= LG.getLayers()
@@ -42,9 +41,9 @@ var map = new Map({
   view: new View({
     center: fromLonLat.fromLonLat([-97.6114, 38.8403]),
     zoom: 3.6,
+    maxZoom:10
   })
 });
-
 
 
 
@@ -75,12 +74,12 @@ map.on('pointermove', function(evt) {
   var pixel = map.getEventPixel(evt.originalEvent);
   displayFeatureInfo(pixel);
 });
-console.log(map.getTarget().values_)
+
 map.on('click', function(evt) {
   displayFeatureInfo(evt.pixel);
 });
 
-
+//map.addLayer(vectLay)
 
 const buttons= document.getElementsByClassName('base-btn')
 let ls= LG.getLayers().getArray()
@@ -95,7 +94,6 @@ for (let butt of buttons){
     }else{
       ind.setVisible(false)
     }
-  console.log(ind.get("name"), ind.get("visible"))
 
   })
 
@@ -115,4 +113,34 @@ for (let butt of buttons){
 }
 
 
+
+//map.addLayer(vectLayer)
+//console.log(vectLayer.getProperties())
+let feat=[]
+let fty= new ol.format.EsriJSON()
+    function featureGetter(url){
+       
+     fetch(DATALAYER[2].url+fmtString)
+      .then(function(response) {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        // Read the response as json.
+        return response.json();
+      })
+      .then(function(responseAsJson) {
+        // Do stuff with the JSON
+        feat.push(responseAsJson)
+        console.log(responseAsJson);
+      })
+      .catch(function(error) {
+        console.log('Looks like there was a problem: \n', error);
+      });
+      return feat
+    }
+
+let u=featureGetter()
+
+
+console.log(u)
 
